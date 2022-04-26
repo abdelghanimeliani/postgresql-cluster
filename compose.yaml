@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   db:
-    image: postgres
+    container_name: postgresql-db
+    image: postgres:latest
     restart: always
     environment:
       - POSTGRES_USER=postgres
