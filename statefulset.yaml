@@ -20,7 +20,7 @@ spec:
   type : LoadBalancer
   ports:
   - port: 5432
-  targetPort : 5432
+    targetPort: 5432 
 ---
 # PostgreSQL StatefulSet
 apiVersion: apps/v1
@@ -28,10 +28,10 @@ kind: StatefulSet
 metadata:
   name: postgresql-db
 spec:
+  serviceName: postgresql-db-service
   selector:
     matchLabels:
       app: postgresql-db
-  serviceName: postgresql-db-service
   replicas: 2
   template:
     metadata:
@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
       - name: postgresql-db
-        image: postgres:10.4
+        image: postgres
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5432

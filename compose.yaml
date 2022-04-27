@@ -1,23 +1,18 @@
-version: '3.8'
+version: '3.1'
 services:
-  db:
-    container_name: postgresql-db
+  postgres-db:
+    container_name: postgres-db
     image: postgres:latest
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      POSTGRES_USER : postgres
+      POSTGRES_PASSWORD : postgres
+      POSTGRES_DB : postgres
+      PGDATA : /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-db-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
-    volumes: 
-      - db:/var/lib/postgresql/data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
- 
-   
+      - 5432:5432
 volumes:
-  db:
-    driver: local
-
-
-
-   
+  postgres-db-data:
+     name: postgres-db-data	
