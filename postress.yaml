@@ -1,0 +1,32 @@
+# PostgreSQL StatefulSet - ConfigMap
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+   name: postgresql-db
+spec:
+   serviceName: postgresql-db-service
+   selector:
+     matchLabels:
+       app: postgresql-db
+   replicas: 2
+   template:
+     metadata:
+       labels:
+         app: postgresql-db
+     spec:
+       containers:
+       - name: postgresql-db-multi
+         image: lmmdock/postgres-multi
+         envFrom:
+         - configMapRef:
+            name: postgres-db-config
+         imagePullPolicy: IfNotPresent
+         ports:
+         - containerPort: 5432
+         resources:
+           requests:
+              memory: "265Mi"
+              cpu: "250m"
+           limits:
+              memory: "512Mi"
+              cpu: "500m" 

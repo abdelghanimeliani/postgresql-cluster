@@ -1,0 +1,10 @@
+# PostgreSQL StatefulSet ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: postgres-db-config
+   labels:
+     app: postgresql-db
+data:
+   POSTGRES_USERS : "user1:password1|user2:password2|user3:password3"
+   POSTGRES_DATABASES : "db1:user1|db2:user2|db3:user3"

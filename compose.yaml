@@ -1,18 +1,11 @@
 version: '3.1'
 services:
   postgres-db:
-    container_name: postgres-db
-    image: postgres:latest
+    container_name: postgres_multi
+    image: lmmdock/postgres-multi:latest
     restart: always
     environment:
-      POSTGRES_USER : postgres
-      POSTGRES_PASSWORD : postgres
-      POSTGRES_DB : postgres
-      PGDATA : /var/lib/postgresql/data/pgdata
-    volumes:
-      - postgres-db-data:/var/lib/postgresql/data
+      POSTGRES_USERS : "user1:password1|user2:password2|user3:password3"
+      POSTGRES_DATABASES : "db1:user1|db2:user2|db3:user3"
     ports:
       - 5432:5432
-volumes:
-  postgres-db-data:
-     name: postgres-db-data	
